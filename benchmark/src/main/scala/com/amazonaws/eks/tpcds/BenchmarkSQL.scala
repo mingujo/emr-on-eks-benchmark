@@ -8,6 +8,7 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.functions.col
 import org.apache.log4j.{Level, LogManager}
 import scala.util.Try
+import scala.sys.process._
 
 object BenchmarkSQL {
   def main(args: Array[String]) {
@@ -32,7 +33,7 @@ object BenchmarkSQL {
       .getOrCreate()
 
     // Start Prometheus agent in the Custom Image
-    val result = Seq("/home/hadoop/start-prometheus-agent.sh").!!
+    val result1 = Seq("/home/hadoop/start-prometheus-agent.sh").!!
     println("Prometheus config file")
     val d = Seq("cat", "/home/hadoop/prometheus.yaml").!!
     println(d)
