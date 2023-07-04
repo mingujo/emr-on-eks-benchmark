@@ -31,6 +31,19 @@ object BenchmarkSQL {
       .appName(s"TPCDS SQL Benchmark $scaleFactor GB")
       .getOrCreate()
 
+    // Start Prometheus agent in the Custom Image
+    val result = Seq("/home/hadoop/start-prometheus-agent.sh").!!
+    println("Prometheus config file")
+    val d = Seq("cat", "/home/hadoop/prometheus.yaml").!!
+    println(d)
+    println("Start Prometheus Agent script")
+    val f = Seq("cat", "/home/hadoop/start-prometheus-agent.sh").!!
+    println(f)
+
+    // Check if Prometheus is running
+    println("is Prometheus running?")
+    println("ps -ef" #| "grep -i prometheus.yaml" !)
+
     if (onlyWarn) {
       println(s"Only WARN")
       LogManager.getLogger("org").setLevel(Level.WARN)
